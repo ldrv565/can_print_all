@@ -1,0 +1,117 @@
+@font-face {
+  font-family: bebasneuebook;
+  src: url("../fonts/bebasneuebook.eot");
+  src: url("../fonts/bebasneuebook.eot?#iefix") format("embedded-opentype"), url("../fonts/bebasneuebook.woff") format("woff"), url("../fonts/bebasneuebook.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: bebasneueregular;
+  src: url("../fonts/bebasneueregular.eot");
+  src: url("../fonts/bebasneueregular.eot?#iefix") format("embedded-opentype"), url("../fonts/bebasneueregular.woff") format("woff"), url("../fonts/bebasneueregular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: gothampro;
+  src: url("../fonts/gothampro.eot");
+  src: url("../fonts/gothampro.eot?#iefix") format("embedded-opentype"), url("../fonts/gothampro.woff") format("woff"), url("../fonts/gothampro.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: gothamprobold;
+  src: url("../fonts/gothamprobold.eot");
+  src: url("../fonts/gothamprobold.eot?#iefix") format("embedded-opentype"), url("../fonts/gothamprobold.woff") format("woff"), url("../fonts/gothamprobold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: gothamprolighter;
+  src: url("../fonts/gothamprolighter.eot");
+  src: url("../fonts/gothamprolighter.eot?#iefix") format("embedded-opentype"), url("../fonts/gothamprolighter.woff") format("woff"), url("../fonts/gothamprolighter.ttf") format("truetype");
+}
+
+body {
+  font-family: gothampro;
+  margin: 0;
+}
+
+.karkas {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-size: inherit;
+  font-weight: unset;
+}
+
+input {
+  font-size: inherit;
+  outline: none;
+}
+
+.image {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.image__img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  vertical-align: bottom;
+}
+
+.counter {
+  display: flex;
+  font-weight: bold;
+  height: 60px;
+  width: 140px;
+}
+
+.counter__value {
+  border: 0;
+  outline: none;
+  border-top: 1px solid #f7f7f7;
+  border-bottom: 1px solid #f7f7f7;
+  width: 40%;
+  text-align: center;
+}
+
+.counter__decrementer,
+.counter__incrementer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #f7f7f7;
+  width: 30%;
+  cursor: pointer;
+}
+
+.counter__decrementer:hover,
+.counter__incrementer:hover {
+  color: white;
+}
+
+.counter--small {
+  height: 40px;
+  width: 100px;
+}
+
+@media (max-width: 768px) {
+  .counter {
+    height: 40px;
+    font-size: 12px;
+    width: 100px;
+  }
+}
