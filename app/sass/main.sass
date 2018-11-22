@@ -37,6 +37,7 @@ $extra_large: "max-width: 1350px"
 $large: "max-width: 1050px"
 $medium: "max-width: 768px"
 $small: "max-width: 480px"
+$extra_small: "max-width: 360px"
 //</брейкпоинты>
 //<теги>
 body
@@ -67,8 +68,10 @@ li, ul
 //<глобальные_блоки>
 .buttons_section
     display: flex
+    flex-wrap: wrap
     justify-content: space-between
     align-items: center
+
 .link
     color: $grey2
     border-bottom: 1px solid $grey2
@@ -78,6 +81,7 @@ li, ul
     padding: 15px 30px
     cursor: pointer
     font-family: gothamprobold
+    white-space: nowrap
     @media($large)
         padding: 8px 16px
 .title
@@ -225,7 +229,7 @@ li, ul
             height: 30px
         &.--small
             width: 30px
-            height: 40px
+            height: 30px
     &__cost
         font-size: 2em
         font-family: gothamprobold
@@ -305,7 +309,7 @@ li, ul
     left: 0
     right: 0
     bottom: 0
-    background: rgba(black, .1)
+    background: rgba(black, .4)
     text-align: center
     &__window
         display: none
@@ -314,6 +318,8 @@ li, ul
         padding: 40px
         border-radius: 10px
         background: white
+        @media($medium)
+            padding: 20px
         &.--opened
             display: block
     &__input, &__text
@@ -455,8 +461,8 @@ li, ul
     padding: $atom 0
     background: $light_grey
     &__img
+        display: block
         width: 100%
-        padding-bottom: 60px
     &.--center 
         text-align: center
     &.--promo
@@ -480,19 +486,75 @@ li, ul
         border-bottom: 1px solid $grey2
         width: 100px
         padding-bottom: $atom/4
+        @media($medium)
+            padding-bottom: 0
+    @media($medium)
+        padding-left: $atom
+        margin-top: $atom
+        width: ($columns - 2) * $atom
+    @media($small)
+        margin-top: 5px
+.slider
+    overflow-x: scroll
+    overflow-y: hidden
+    white-space: nowrap
+    -webkit-overflow-scrolling: touch
+    height: 1000px
+    &__wrap
+        display: block
+        overflow: hidden
+        height: 25vw
+        @media($large)
+            height: 28vw
+        @media($medium)
+            height: 32vw
+        @media($small)
+            height: 40vw
+    &__content
+        display: inline-block
+        width: 93.5vw
     &__box
         display: inline-block
         margin-top: 2 * $atom
         width: 320px
+        vertical-align: top
+        white-space: normal
         @media($large)
-            width: 240px
-            background: rgba(white, .6)
-.slider
-    margin: auto
-    margin-top: 10%
-    width: 150px
-    @media($small)
+            width: 30%
+        @media($medium)
+            width: 40%
+        @media($small)
+            margin-top: $atom
+            width: 50%
+            .title, .subtitle, .button
+                margin: 1px 0
+    &__image
+        display: inline-block
+        height: 8.5 * $atom
+        overflow: hidden
+        margin-left: calc(37% - 320px)
+        width: 63%
+        @media($large)
+            width: 65%
+            margin-left: 5%
+        @media($medium)
+            width: 55%
+        @media($small)
+            width: 50%
+            margin-left: 0
+        img
+            display: block
+            margin: auto
+            height: 100%
+    &__controller
+        display: block
         margin: auto
+        margin-top: $atom
+        width: 210px
+        @media($medium)
+            margin-top: 0
+        @media($small)
+            display: none
     &__circle
         display: inline-block
         width: 10px
@@ -501,9 +563,14 @@ li, ul
         background: $grey2
         margin: 0 4px
         cursor: pointer
+        @media($medium)
+            width: 14px
+            height: 14px
     &__arrow
         display: inline-block
         font-size: 21px
+        width: 30px
+        text-align: center
         cursor: pointer
         &--left
             transform: rotate(180deg)
@@ -692,6 +759,8 @@ $card_margin: $atom/4
             color: $grey3
     li
         cursor: pointer
+        @media($medium)
+            padding: 10px 0
     @media($medium)
         display: none
         position: absolute
@@ -852,7 +921,7 @@ $card_margin: $atom/4
     display: block
     width: 20 * $atom
     margin-left: 8 * $atom 
-    margin-bottom: $atom 
+    margin-bottom: $atom/2
     font-family: gothampro
     color: $grey3
     h2
@@ -860,6 +929,8 @@ $card_margin: $atom/4
         font-family: gothamprobold
         margin-bottom: $atom
         color: $grey4
+        @media($large)
+            font-size: 14px
     li
         display: list-item
     img
@@ -886,6 +957,8 @@ $card_margin: $atom/4
         font-family: gothamprobold
         margin-bottom: $atom
         color: $grey4
+        @media($large)
+            font-size: 14px
     &__items
         font-family: gothamprobold
         a
@@ -894,7 +967,6 @@ $card_margin: $atom/4
     width: 100%
     border: 0
     height: 350px
-    padding-bottom: $atom
 ///main
 //footer
 .footer

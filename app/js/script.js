@@ -4,6 +4,13 @@ $("document").ready(function () {
     $(".--select").click(toggleSelect)
     $(".setting.--dropDown").find(".setting__header").click(toggleSettingsDrop)
     $(".table.--dropDown").find(".table__head").click(toggleTableDrop)
+    $(".header__log_in").click(function(){toggleModal("--login")})
+    $(".order").click(function(){toggleModal("--order")})
+    $(".order_design").click(function(){toggleModal("--orderDesign")})
+    $(".header__registration_link").click(function(){toggleModal("--registration")})
+    $(".change_data").click(function(){toggleModal("--changeData")})
+    $(".modal").click(function(){toggleModal(currentModalType)})
+    slider()
 })
 
 toggleOpen = function() {
@@ -11,7 +18,7 @@ toggleOpen = function() {
     $(this).next().toggleClass("--opened")
 }
 
-toggleSelect = function(event) {
+toggleSelect = function() {
     let selectValue = $(this).find(".select_value")
     let selectList = $(this).find(".select_list")
 
@@ -36,6 +43,55 @@ toggleTableDrop = function() {
     list.toggleClass("--opened")
 }
 
-toggleModal = function() {
+var currentModalType
+
+toggleModal = function(type) {
+    if(!$(event.target).closest(".modal__window").length) {
+        $(".modal").toggleClass("--opened")
+        $("." + type).toggleClass("--opened")
+        currentModalType = type
+    }
+}
+
+var currentCircleIndex = 0 
+var sliderLegth = 0
+
+slider = function() {
+    [...$(".slider__circle")].forEach(function(item, i, arr) {
+        $(item).click(function() {
+            circleClick(i)
+        })
+    })
     
+    sliderLegth = $(".slider__circle").length
+
+    $(".slider__arrow").click(function() {
+        if($(this).hasClass("slider__arrow--left")) {
+            if (currentCircleIndex < 1) {
+                circleClick(sliderLegth - 1)
+            } else {
+                circleClick(currentCircleIndex - 1)
+            }
+        } else {
+            if (currentCircleIndex > sliderLegth - 2) {
+                circleClick(0)
+            } else {
+                circleClick(currentCircleIndex + 1)
+            }
+        }
+    })
+}
+
+circleClick = function (i) {
+    changeContent(i)
+    $(".slider__circle").eq(currentCircleIndex).toggleClass("bgc s3")
+    $(".slider__circle").eq(i).toggleClass("bgc s3")
+    currentCircleIndex = i
+}
+
+changeContent = function(index) {
+    console.log($(".slider__content").eq(index)[0].scrollWidth)
+    $('.slider').animate({
+        scrollLeft: $(".slider__content").eq(index)[0].scrollWidth * index
+    }, 200);
 }
