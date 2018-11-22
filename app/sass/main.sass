@@ -1,16 +1,20 @@
 //<шрифты>
 @mixin addFont ($fontName)
     font-family: $fontName
-    src: url('../fonts/'+$fontName+'.eot')
-    src: url('../fonts/'+$fontName+'.eot?#iefix') format('embedded-opentype'),
-    url('../fonts/'+$fontName+'.woff') format('woff'),
-    url('../fonts/'+$fontName+'.ttf') format('truetype')
+    src: url('./fonts/'+$fontName+'.eot')
+    src: url('./fonts/'+$fontName+'.eot?#iefix') format('embedded-opentype'),
+    url('./fonts/'+$fontName+'.woff') format('woff'),
+    url('./fonts/'+$fontName+'.ttf') format('truetype')
 @font-face 
     @include addFont(bebasneuebook)
 @font-face 
     @include addFont(bebasneueregular)
 @font-face 
+    @include addFont(bebasneuebold)
+@font-face 
     @include addFont(gothampro)    
+@font-face 
+    @include addFont(gothampromedium)    
 @font-face 
     @include addFont(gothamprobold)    
 @font-face 
@@ -24,6 +28,7 @@ $atom: 100vw / $columns
 $grey: #d4ddeb
 $grey2: #b2bcc8
 $grey3: #c1c1c1
+$grey4: #6e6e6e
 $light_grey: #f7f7f7
 $black: #2f2f2f
 //</цвета>
@@ -35,7 +40,7 @@ $small: "max-width: 480px"
 //</брейкпоинты>
 //<теги>
 body
-    font-family: gothampro 
+    font-family: gothampromedium
     margin: 0
 .karkas
     width: 100%
@@ -51,11 +56,55 @@ h1, h2, h3
 input
     font-size: inherit
     outline: none
+li, ul
+    display: block
+    margin: 0
+    padding: 0
+.hc, .sh, .sh2, .sh3,.bghc, .bdhc
+    cursor: pointer
 //</теги>
-//<основные_контейнеры>
-//</основные_контейнеры>
 
 //<глобальные_блоки>
+.buttons_section
+    display: flex
+    justify-content: space-between
+    align-items: center
+.link
+    color: $grey2
+    border-bottom: 1px solid $grey2
+.button
+    display: inline-block
+    color: white
+    padding: 15px 30px
+    cursor: pointer
+    font-family: gothamprobold
+    @media($large)
+        padding: 8px 16px
+.title
+    font-size: 32px
+    font-family: gothamprobold
+    margin-bottom: $atom/2
+    &.--main
+        color: $grey4
+        font-size: 21px
+        @media($medium)
+            margin: $atom
+    @media($large)
+        font-size: 18px
+    @media($medium)
+        font-size: 14px
+.subtitle
+    font-size: 26px
+    font-family: bebasneuebold
+    margin-bottom: $atom
+    @media($large)
+        font-size: 16px
+.logo
+    display: inline-block
+    margin-right: $atom
+    img
+        @media($medium)
+            height: 30px
 .image
     position: relative
     width: 100%
@@ -69,30 +118,821 @@ input
         vertical-align: bottom
 .counter
     display: flex
-    font-weight: bold
-    height: 60px
-    width: 140px
-    @media($medium)
-        height: 40px
-        font-size: 12px
-        width: 100px
-    &__value
-        border: 0
-        outline: none
-        border-top: 1px solid $light_grey
-        border-bottom: 1px solid $light_grey
-        width: 40%
-        text-align: center
-    &__decrementer, &__incrementer
-        display: flex
+    justify-content: center
+    align-items: center
+    &__button, &__value
+        display: inline-flex
         justify-content: center
         align-items: center
-        border: 1px solid $light_grey
-        width: 30%
+        text-align: center
+        color: $grey4
+        font-weight: bold
+        width: 50px
+        height: 50px
         cursor: pointer
-        &:hover
-            color: white
-    &--small
-        height: 40px
-        width: 100px
+        background: transparent
+        border: 1px solid transparent
+        outline: none
+        @media($large)
+            width: 25px
+            height: 25px
+    &__button
+        width: 20px
+        height: 20px
+        color: white
+.nav
+    display: flex
+    flex-wrap: wrap
+    height: 100%
+    &__item
+        display: flex
+        align-items: center
+        margin: 0 $atom/3
+        padding: $atom/3 0
+        border-bottom: .25vw solid transparent
+        &.--arrow
+            font-size: 2.5em
+            line-height: .5em
+    &.--grey2
+        color: $grey2
+    &.--opened
+        display: flex
+.opener
+    display: none
+    font-size: 20px
+    line-height: 20px
+    padding: 10px
+    cursor: pointer
+    @media($medium)
+        display: block
+.text
+    color: $grey2
+    font-size: 14px
+    font-family: gothampro
+    li
+        display: list-item
+    &.--grey3
+        color: $grey3
+    &.--bold
+        font-family: gothamprobold
+    &.--lighter
+        font-family: gothamprolighter
+        &.--bold
+            font-weight: bold
+    &.--uppercase
+        text-transform: uppercase
+.totalprice
+    width: 100%
+    text-align: right
+    font-size: 21px
+    color: $grey4
+    margin-bottom: $atom/2
+    @media($medium)
+        font-size: 12px
+    &__cost
+        font-size: 41px
+        font-family: gothamprobold
+        @media($medium)
+            font-size: 16px
+.table
+    text-align: center
+    width: ($columns - 4) * $atom
+    margin: auto
+    border-collapse: collapse
+    font-family: gothampro
+    tr
+        font-size: 14px
+        border-bottom: 1px solid $grey2
+        color: $grey4
+        font-weight: bold
+    td
+        padding: $atom/2 5px
+    tr.table__head
+        color: $grey2
+        background: white
+        border: 0
+        text-transform: uppercase
+        th
+            padding: $atom * .4 0
+        @media($medium)
+            text-transform: unset
+    &__image
+        width: 60px
+        height: 60px
+        margin: auto
+        @media($medium)
+            width: 30px
+            height: 30px
+        &.--small
+            width: 30px
+            height: 40px
+    &__cost
+        font-size: 2em
+        font-family: gothamprobold
+        @media($large)
+            font-size: 1em
+    &__done
+        background: $light_grey
+        color: $grey4
+        text-transform: lowercase
+    @media($small)
+        width: ($columns - 1) * $atom
+    &.--dropDown
+        display: table
+        margin-bottom: 10px
+        width: ($columns - 9) * $atom
+        @media($medium)
+            width: ($columns - 2) * $atom
+            margin-left: $atom
+        @media($small)
+            margin: 0
+        thead
+            cursor: pointer
+            .name
+                color: $grey4
+                text-transform: none
+            th
+                padding: 5px
+        tbody
+            display: none
+            background: white
+            &.--opened
+                display: table-row-group
+        tr
+            border: 0
+
+.tables
+    display: inline-block
+    &.--margin
+        margin-left: $atom
+        @media($medium)
+            margin: auto
+.buttons_box
+    display: flex
+    align-items: center
+    width: ($columns - 4) * $atom
+    margin: $atom auto
+    &__coupon
+        display: flex
+        align-items: center
+        width: 100%
+        text-align: left
+        font-size: 21px
+        color: $grey4
+        @media($medium)
+            font-size: 12px
+    &__input
+        background: transparent
+        border: 0
+        border-bottom: 3px solid black
+        color: $grey4
+        padding: 10px
+        padding-top: 15px
+        width: 17%
+        @media($medium)
+            width: 50%
+.dropDown_arrow
+    font-size: 21px
+    transform: rotate(45deg)
+    &.--rotate
+        transform: rotate(-135deg)
+    @media($medium)
+        font-size: 14px
+.modal
+    position: fixed
+    display: none
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background: rgba(black, .1)
+    text-align: center
+    &__window
+        display: none
+        width: 250px
+        margin: auto
+        padding: 40px
+        border-radius: 10px
+        background: white
+        &.--opened
+            display: block
+    &__input, &__text
+        width: 100%
+        border: 0
+        border-bottom: 2px solid black
+        padding: 10px 0
+        text-align: center
+        font-family: gothampro
+    &__text
+        width: 90%
+        margin-top: 20px
+        padding: 0
+        border: 1px solid black
+        text-align: left
+        height: 80px
+        font-size: 12px
+        resize: none
+        outline: none
+        padding: 5%
+        @media($medium)
+            height: 30px
+    &__button
+        margin-top: 20px
+        padding-left: 50px
+        padding-right: 50px
+    &.--opened
+        display: flex
+
 //</глобальные_блоки>
+//<основные_контейнеры>
+//</основные_контейнеры>
+
+//header
+.header
+    position: relative
+    display: flex
+    justify-content: space-between
+    width: ($columns - 2) * $atom
+    padding: 0 $atom
+    border-bottom: 1px solid $grey2
+    font-size: 14px
+    &__section
+        display: flex
+        align-items: center
+    &__nav
+        @media($medium)
+            display: none
+            position: absolute
+            top: 40px
+            left: 0
+            z-index: 3
+            background: white
+            width: 100vw
+            height: auto
+            min-height: 40px
+            justify-content: space-between
+            border-top: 1px solid $grey2
+    &__registration_link
+        color: $grey2
+    &__log_in
+        color: white
+        font-size: 12px
+        padding: 1px 10px
+        border-radius: 10px
+        margin: 0 $atom/2
+    &__user_photo
+        img
+            max-height: .8 * $atom
+            min-height: 30px
+    &__sub_nav_open:hover
+        .header_sub_nav
+            display: block
+    &--height--2
+        min-height: 2 * $atom
+.header_sub_nav
+    display: none
+    position: absolute
+    top: 100%
+    left: 0
+    width: 100%
+    z-index: 1
+    border: 1px solid black
+    background: white
+    padding-left: 2 * $atom
+    font-family: gothampro
+    &__item
+        display: inline-block
+        margin: $atom
+        vertical-align: top 
+        ul
+            padding-top: $atom/2
+            li
+                padding: 5px 0
+                &:hover
+                    font-weight: bold
+
+.search
+    display: flex
+    font-size: 12px
+    margin-right: $atom
+    @media($medium)
+        height: 30px
+    &__input
+        color: $grey2
+        border-radius: 5px 0 0 5px
+        border: 0
+        border-right: 0
+        padding-left: 20px
+        font-family: gothampromedium
+        width: $atom * 7
+        border: 1px solid $grey
+        @media($large)
+            width: $atom * 4
+        @media($medium)
+            width: 80%
+    &__button
+        display: flex
+        align-items: center
+        color: white
+        padding: $atom/4 $atom
+        border: 0
+        border-radius: 0 5px 5px 0
+        cursor: pointer
+.bug
+    position: relative
+    &__count
+        position: absolute
+        top: 0
+        right: -8px
+        font-size: 12px
+        padding: 2px 6px
+        border-radius: 10px
+        color: white
+///header
+//main
+.main
+    position: relative
+    padding: $atom 0
+    background: $light_grey
+    &__img
+        width: 100%
+        padding-bottom: 60px
+    &.--center 
+        text-align: center
+    &.--promo
+        padding: 0
+        background: white
+    &.--white
+        background: white
+    &.--index
+        padding: 2 * $atom 0
+    &.--table
+        overflow: auto
+.promo
+    position: absolute
+    top: 0
+    margin-top: 2 * $atom
+    padding-left: 3 * $atom
+    width: ($columns - 4) * $atom
+    border-right: 1px solid $grey2
+    &__popular
+        color: $grey2
+        border-bottom: 1px solid $grey2
+        width: 100px
+        padding-bottom: $atom/4
+    &__box
+        display: inline-block
+        margin-top: 2 * $atom
+        width: 320px
+        @media($large)
+            width: 240px
+            background: rgba(white, .6)
+.slider
+    margin: auto
+    margin-top: 10%
+    width: 150px
+    @media($small)
+        margin: auto
+    &__circle
+        display: inline-block
+        width: 10px
+        height: 10px
+        border-radius: 20px
+        background: $grey2
+        margin: 0 4px
+        cursor: pointer
+    &__arrow
+        display: inline-block
+        font-size: 21px
+        cursor: pointer
+        &--left
+            transform: rotate(180deg)
+            padding-bottom: 4px
+.catalog
+    display: inline-flex
+    justify-content: space-between
+    flex-wrap: wrap
+    width: ($columns - 8) * $atom
+    &__nav
+        width: 100%
+        height: $atom
+        margin-bottom: $atom/4
+        padding-top: $atom/2
+        border-radius: 10px
+        overflow: hidden
+        background: white
+        padding-left: 10px
+        @media($medium)
+            padding-top: 14px
+            height: 26px
+        .nav__item
+            align-items: flex-start
+            padding: 0 $atom
+            margin: 0
+    &.--index
+        width: ($columns - 6) * $atom
+        .card
+            margin-left: $atom/2
+    @media($medium)
+        width: calc(#{(($columns - 3) * $atom)} - 50px)
+    &.--articles
+        @media($medium)
+            width: (($columns - 2) * $atom)
+
+$card_width: 5.5 * $atom
+$card_margin: $atom/4
+.card
+    padding-top: $atom/2
+    margin-bottom: -$atom * 1.5
+    display: inline-block
+    width: 5.5 * $atom
+    min-width: 100px
+    border-radius: 10px
+    overflow: hidden
+    cursor: pointer
+    text-align: center
+    &__image
+        height: 3.5 * $atom
+        width: 3 * $atom    
+        margin: auto
+        margin-top: $atom/2
+    &__title
+        font-size: 21px
+        @media($large)
+            font-size: 16px
+        @media($medium)
+            font-size: 14px
+    &__size
+        font-size: 12px
+        color: $grey2
+        margin-bottom: $atom/2
+    &__cost
+        position: relative
+        font-size: 24px
+        font-family: gothamprobold
+        padding-bottom: $atom/2
+        @media($large)
+            font-size: 16px
+    &__from
+        font-size: 14px
+        vertical-align: top
+        font-family: gothamprolighter
+        color: $grey2
+    &__more
+        position: relative
+        color: white
+        font-size: 12px
+        padding: 7% 0
+        opacity: 0
+        z-index: 1
+    &:hover
+        background: white
+        .card__more
+            opacity: 1
+    @media($large)
+        width: $card_width * 1.5
+    @media($small)
+        width: $card_width * 2
+.card_advantage
+    display: inline-block
+    width: 6 * $atom
+    text-align: left
+    margin: 0 $atom/2
+    margin-bottom: $atom
+    min-width: 220px
+    cursor: pointer
+    font-family: gothampro
+    &__image
+        width: 1.5 * $atom
+        height: 2 * $atom
+        margin: $atom / 2
+    &__box
+        border-radius: 10px
+    &__title
+        font-size: 21px
+        margin: 0
+        padding: $atom / 2
+        font-family: gothampromedium
+        @media($large)
+            font-size: 16px
+        @media($medium)
+            font-size: 14px
+    &__text
+        color: $grey3
+        padding: $atom / 2
+    &__button
+        opacity: 0
+        margin: $atom / 2
+    &:hover
+        .card_advantage__box
+            box-shadow: 30px 10px 50px rgba(black, .05)
+        .card_advantage__button
+            opacity: 1
+    @media($large)
+        min-width: 150px
+    @media($medium)
+        width: $card_width * 2
+.aside
+    position: relative
+    display: inline-block
+    margin: 0 $atom
+    width: 4 * $atom
+    padding: $atom/2
+    background: white
+    border-radius: 10px
+    vertical-align: top
+    &__title
+        font-size: 21px
+        @media($large)
+            font-size: 14px
+        @media($medium)
+            display: none
+    @media($medium)
+        display: inline-flex
+        justify-content: center
+        align-items: center
+        width: 40px
+        height: 40px
+        padding: 0
+.asideHeader
+    display: inline-block
+    margin-left: $atom
+    width: 6 * $atom
+    vertical-align: top
+    &__title
+        font-size: 26px
+        @media($large)
+            font-size: 14px
+    &__button
+        font-family: gothampro
+        @media($extra_large)
+            font-size: 12px
+    @media($medium)
+        width: 100%
+        text-align: center
+        margin: 0
+.menu
+    padding-top: $atom/2
+    border: 2px solid $light_grey
+    border-left: 0
+    border-right: 0
+    &__title
+        display: block
+        font-family: gothamprobold
+        padding: $atom/8 0
+    &__subMenu
+        display: none
+        border-top: 1px solid $light_grey
+        padding: $atom/4
+        padding-left: $atom/2
+        &.--opened
+            display: block
+        li
+            padding: $atom/8 0
+            color: $grey3
+    li
+        cursor: pointer
+    @media($medium)
+        display: none
+        position: absolute
+        top: 40px
+        left: 0
+        width: 200px
+        background: white
+        z-index: 2
+        padding-left: $atom / 2
+        padding-bottom: $atom / 2
+        border-radius: 0 10px 10px 10px
+    &.--opened
+        display: block
+.product
+    display: inline-block
+    width: ($columns - 8) * $atom
+    &__description
+        display: inline-block
+        width: 13 * $atom
+        vertical-align: top
+        margin-right: 2.5 * $atom
+        @media($extra_large)
+            margin-right: $atom
+        @media($medium)
+            width: calc(#{(($columns - 3) * $atom)} - 40px)
+    &__settings
+        display: inline-block
+        width: 7.5 * $atom
+        padding-top: $atom
+        vertical-align: top
+        .title
+            font-size: 26px
+            padding-bottom: $atom/8
+            @media($large)
+                font-size: inherit
+        @media($extra_large)
+            width: 12 * $atom
+        @media($medium)
+            width: calc(#{(($columns - 3) * $atom)} - 40px)
+    &__image
+        background: white
+        height: 12 * $atom
+        margin-bottom: $atom
+        .image__img
+            width: 50%
+            margin: auto
+            right: 0
+            bottom: 0
+            @media($medium)
+                width: auto
+                height: 50%
+    @media($medium)
+        width: calc(#{(($columns - 3) * $atom)} - 50px)
+.setting
+    padding: $atom/2 0
+    border-bottom: 3px solid $grey2
+    &__header
+        padding-bottom: $atom/4
+    &__content
+        display: flex
+        flex-wrap: wrap
+        justify-content: space-between
+        align-items: center
+    &__image
+        width: 24%
+        height: 1.75 * $atom
+        margin-bottom: $atom/8
+        cursor: pointer
+        @media($extra_large)
+            height: 2.75 * $atom
+        @media($medium)
+            height: 6.5 * $atom
+    &__element
+        display: flex
+        justify-content: center
+        width: 24%
+        padding: 13px 0
+        margin: 5px 0
+        background: white
+        color: $grey2
+        cursor: pointer
+        font-family: gothamprolighter
+        font-weight: bold
+        font-size: 14px
+        &.--orientation
+            width: 48.5%
+        &.--select
+            display: block
+            position: relative
+            .select_button
+                display: flex
+                justify-content: space-between
+                width: 70%
+                margin: auto
+                .select_value
+                .select_arrow
+                    transform: rotate(45deg)
+            .select_list
+                display: none
+                position: absolute
+                left: 0
+                right: 0
+                background: white
+                z-index: 1
+                .setting__element
+                    width: 86%
+                    padding-left: 14%
+                    justify-content: flex-start
+                &.--opened
+                    display: block
+    .button
+        margin-top: $atom/2
+        margin-left: auto
+    &.--dropDown
+        .setting__header
+            display: flex
+            justify-content: space-between
+            align-items: center
+            cursor: pointer
+        .setting__content
+            display: none
+            .text
+                width: 75%
+            &.--opened
+                display: flex
+    &.--border0
+        border: 0
+.article_card
+    color: $grey4
+    cursor: pointer
+    margin: auto
+    margin-bottom: $atom/2
+    padding: $atom/2
+    &__image
+        display: inline-block
+        width: 5 * $atom
+        height: 5 * $atom
+        margin: auto
+    &__box
+        display: inline-block
+        width: 10 * $atom
+        margin-top: $atom / 1.5
+        margin-left: $atom / 1.5
+        vertical-align: top
+        @media($extra_large)
+            width: 18 * $atom
+        @media($medium)
+            width: 22 * $atom
+    &__title
+        font-size: 24px
+        @media($medium)
+            font-size: unset
+    &__button
+        margin-top: $atom/2
+        padding-left: $atom 
+        padding-right: $atom
+.content
+    display: block
+    width: 20 * $atom
+    margin-left: 8 * $atom 
+    margin-bottom: $atom 
+    font-family: gothampro
+    color: $grey3
+    h2
+        font-size: 21px
+        font-family: gothamprobold
+        margin-bottom: $atom
+        color: $grey4
+    li
+        display: list-item
+    img
+        width: 40%
+        float: right
+        padding-left: $atom
+        padding-bottom: $atom
+    &.--inline
+        display: inline-block
+        margin-left: $atom
+        @media($medium)
+            display: block
+            margin: auto
+    @media($extra_large)
+        width: 25 * $atom
+    @media($medium)
+        width: 30 * $atom
+        margin-left: 2 * $atom
+.contact
+    display: flex
+    justify-content: space-between
+    &__title
+        font-size: 21px
+        font-family: gothamprobold
+        margin-bottom: $atom
+        color: $grey4
+    &__items
+        font-family: gothamprobold
+        a
+            margin-left: $atom/2
+.map
+    width: 100%
+    border: 0
+    height: 350px
+    padding-bottom: $atom
+///main
+//footer
+.footer
+    display: flex
+    flex-wrap: wrap
+    justify-content: center
+    padding-top: 2 * $atom
+    padding-bottom: $atom
+    font-size: 12px
+    font-family: gothamprolighter
+    background: $light_grey
+    &__logo
+        @media($medium)
+            flex-basis: 100%
+            margin-left: 5%
+            padding-bottom: $atom/2
+    &__item
+        flex-basis: 20%
+        padding-bottom: $atom
+        li
+            padding-bottom: $atom/2
+            &:hover
+                font-weight: bold
+        @media($medium)
+            flex-basis: 20%
+            padding-left: 5%
+        @media($small)
+            flex-basis: 40%
+            padding: 5%
+    &__footer
+        display: flex
+        justify-content: center
+        padding-top: $atom /2
+        text-align: center
+        font-family: gothamprobold
+        flex-basis: 100%
+///footer
+
+@media($large)
+    *
+        font-size: 12px

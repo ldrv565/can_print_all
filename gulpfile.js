@@ -22,10 +22,10 @@ gulp.task('browser-sync', function() { // Создаем таск browser-sync
 	});
 });
 
-gulp.task('watch', ['browser-sync', 'sass'], function() {
-	gulp.watch('app/sass/*.sass', ['sass']); // Наблюдение за sass файлами в папке sass
-	gulp.watch('app/*.html', browserSync.reload); // Наблюдение за HTML файлами в корне проекта
-	gulp.watch('app/js/*.js', browserSync.reload); // Наблюдение за JS файлами в папке js
-});
+gulp.task('watch', gulp.parallel('browser-sync', 'sass',function() {
+	gulp.watch('app/sass/*.sass').on('change', gulp.series('sass')); // Наблюдение за sass файлами в папке sass
+	gulp.watch('app/*.html').on("change", function(){browserSync.reload}); // Наблюдение за HTML файлами в корне проекта
+	gulp.watch('app/js/*.js').on("change", function(){browserSync.reload});  // Наблюдение за JS файлами в папке js
+}));
 
-gulp.task('default', ['watch']);
+gulp.task('default', gulp.series('watch'));
